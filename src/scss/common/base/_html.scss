@@ -1,0 +1,51 @@
+@use "common/resources";
+
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @include resources.normal_text_sizes;
+}
+
+body > header {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 10px;
+
+    background-color: resources.$brown_2;
+    color: resources.$cyan_2;
+
+    text-align: center;
+
+    * { text-shadow: 0 0 .2em resources.$brown_5; }
+}
+
+body > main {
+    flex: 1;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 20px;
+    justify-content: flex-start;
+
+    background-color: resources.$brown_3;
+    color: resources.$cyan_1;
+
+    > * { margin: 0 auto; }
+}
+
+body > footer {
+    min-width: 100%;
+
+    background-color: resources.$brown_1;
+    color: resources.$cyan_3;
+}

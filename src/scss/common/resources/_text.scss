@@ -1,0 +1,17 @@
+$_DEFAULT_FONTS: gill sans, "Lahoma", sans-serif;
+
+
+@mixin _text_sizes($font-size-rem, $fonts: $_DEFAULT_FONTS, $font-weight: normal) {
+    font-family: $fonts;
+    font-size: $font-size-rem;
+    font-weight: $font-weight;
+    line-height: $font-size-rem + 0.35rem;
+}
+
+
+@mixin title_text_sizes { @include _text_sizes(3.5rem, $font-weight: bold); }
+@mixin subtitle_text_sizes { @include _text_sizes(1.3rem, $font-weight: bold); }
+
+@mixin heading_text_sizes { @include _text_sizes(1.6rem, $font-weight: bold); }
+
+@mixin normal_text_sizes { @include _text_sizes(1rem); }

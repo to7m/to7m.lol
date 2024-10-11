@@ -1,0 +1,87 @@
+@use "common/resources";
+
+
+#processing-settings-form {
+    width: 300px;
+    grid-template-columns: auto 6ch min-content;
+
+    input { @include resources.no_input_incrementer; }
+
+    .start-stop-button { grid-column: span 3; }
+}
+
+#graphs {
+    padding: 1rem 3.5rem 1rem 0.5rem;
+
+    display: grid;
+    grid-template-rows: 300px 3rem 300px;
+    grid-template-columns: 10rem 4rem minmax(400px, 700px);
+
+    > div { display: contents; }
+
+    h2 {
+        align-self: center;
+        text-align: right;
+    }
+
+    ul {
+        position: relative;
+        height: 100%;
+        width: 100%;
+
+        li {
+            position: absolute;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .generated-markers { display: contents; }
+    }
+
+    canvas {
+        height: 100%;
+        width: 100%;
+    }
+
+    #amplitude-markers, #phase-markers {
+        li {
+            transform: translate(0, -50%);
+            right: 0.4rem;
+        }
+    }
+
+    #amplitude-markers {
+        input { width: 7ch; }
+    }
+
+    > div {
+        display: block;
+        position: relative;
+    }
+
+    #analysis-direction-form {
+        position: absolute;
+        transform: translate(0, -50%);
+        top: 50%;
+
+        label {
+            padding: 0;
+            vertical-align: top;
+        }
+    }
+
+    #frequency-markers {
+        grid-column: 3;
+
+        li {
+            transform: translate(-50%, -50%);
+            top: 50%;
+        }
+
+        input {
+            width: 7.5ch;
+            @include resources.no_input_incrementer;
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="generated-css/frequency-response-differentiator.css">
+  <title>Frequency Response Differentiator</title>
+</head>
+
+<body>
+  <header>
+    <h1>Frequency Response Differentiator</h1>
+    <span role="doc-subtitle">
+      Compare the frequency content of your browser's left and right audio inputs.
+    </span>
+  </header>
+  <main>
+    <form id="processing-settings-form">
+      <h2>Processing Settings</h2>
+
+      <label for="delayed-channel-button">Channel to treat as delayed:</label>
+      <button type="button" id="delayed-channel-button">Right</button>
+      <span></span>
+
+      <label for="channel-delay-s">Channel delay:</label>
+      <input type="number" value="0" id="channel-delay-s">
+      <span class="field-suffix">seconds</span>
+
+      <button type="button" class="start-stop-button">Start</button>
+    </form>
+    <section id="graphs">
+      <h2 id="amplitude-title">Amplitude<br>Offset</h2>
+      <ul id="amplitude-markers">
+        <li>
+          <input type="number" value="20">
+          <span class="field-suffix">dB</span>
+        </li>
+        <ul class="generated-markers"></ul>
+        <li>
+          <input type="number" value="-20">
+          <span class="field-suffix">dB</span>
+        </li>
+      </ul>
+      <canvas id="amplitude-canvas"></canvas>
+
+      <div><form id="analysis-direction-form">
+        <label for="differing-channel-button">
+          Channel for which difference from the other channel is displayed:
+        </label>
+        <button type="button" id="differing-channel-button">Right</button>
+      </form></div>
+      <ul id="frequency-markers">
+        <li>
+          <input type="number" value="15">
+          <span class="field-suffix">Hz</span>
+        </li>
+        <ul class="generated-markers"></ul>
+        <li>
+          <input type="number" value="30000">
+          <span class="field-suffix">Hz</span>
+        </li>
+      </ul>
+
+      <h2 id="phase-title">Phase<br>Offset</h2>
+      <ul id="phase-markers"></ul>
+      <canvas id="phase-canvas"></canvas>
+    </section>
+  </main>
+
+  <script src="client-runnable/frequency-response-differentiator/js.js"></script>
+</body>
+
+</html>

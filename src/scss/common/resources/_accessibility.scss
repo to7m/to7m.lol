@@ -1,0 +1,11 @@
+@mixin non-bitmap-media-only {
+    @media handheld, print, projection, screen, tv {
+        display: none;
+    }
+}
+
+@mixin bitmap-media-only {
+    @media braille, embossed, speech, tty {
+        display: none;
+    }
+}

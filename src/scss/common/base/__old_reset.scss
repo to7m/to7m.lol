@@ -1,0 +1,71 @@
+/*  Normalise: make behaviour the same on different browsers.  */
+
+*, *::before, *::after {
+    /*  Different browsers supposedly render borders differently. This could be more noticeable
+        if border-box didn't reduce the impact on overall page layout.                           */
+    box-sizing: border-box;
+}
+
+* {
+    /*  Different browsers supposedly disagree about these.  */
+    margin: 0;
+    padding: 0;
+    overflow-wrap: break-word;
+}
+
+body {
+    /*  Different browsers supposedly have unique line-height calculations. em units should not
+        be used for line-height as they cause issues for child elements with different font
+        sizes.                                                                                   */
+    line-height: 1.35;
+
+    /*  Browser-specific tweaks.  */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button, iframe, input, select, table, textarea {
+    border: 2px solid black;
+}
+
+button, input, select, textarea {
+    background-color: inherit;
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+canvas, img, picture, svg, video {
+    /*  Some browsers supposedly cause issues with extra spacing below inline-blocks.  */
+    display: block;
+}
+
+input, textarea {
+    /*  Should be standard, so just in case.  */
+    cursor: text;
+}
+
+
+/*  Custom: tweaks I prefer as defaults for all my projects.  */
+
+:root {
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+* {
+    align-items: inherit;
+    justify-items: inherit;
+    align-content: inherit;
+    justify-content: inherit; 
+    text-align: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-decoration: inherit;
+    color: inherit;
+}

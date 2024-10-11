@@ -1,0 +1,16 @@
+$brown_1: rgb(30%, 10%, 0%);
+$brown_2: rgb(80%, 60%, 40%);
+$brown_3: rgb(90%, 72%, 50%);
+$brown_4: rgb(92%, 77%, 60%);
+$brown_5: rgb(96%, 82%, 69%);
+$cyan_1: rgb(0%, 8%, 15%);
+$cyan_2: rgb(0%, 23%, 30%);
+$cyan_3: rgb(80%, 100%, 100%);
+$grey_1: rgb(80%, 80%, 80%);
+$grey_2: rgb(95%, 95%, 95%);
+$orange_1: rgb(100%, 60%, 30%);
+
+
+@mixin background_img_blend($colour, $img_url) {
+    background-image: linear-gradient($colour, $colour), url($img_url)
+}

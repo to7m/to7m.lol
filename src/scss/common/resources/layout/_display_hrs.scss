@@ -1,0 +1,12 @@
+@mixin hide_hrs($prefixes) {
+    @each $prefix in $prefixes {
+        ##{$prefix}--break { display: none; }
+    }
+}
+
+
+@mixin show_hrs($prefixes) {
+    @each $prefix in $prefixes {
+        ##{$prefix}--break { display: block; }
+    }
+}

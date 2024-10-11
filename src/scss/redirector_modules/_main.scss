@@ -1,0 +1,23 @@
+@use "common/resources";
+
+
+/* some of this duplicated in base/_elements.scss */
+#new-redirector-form {
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: 200px 300px;
+    gap: 5px;
+
+    label {
+        justify-self: end;
+        text-align: right;
+    }
+
+    input {
+        width: 100%;
+        text-align: left;
+    }
+
+    button {
+        grid-column: span 2;
+    }
+}
