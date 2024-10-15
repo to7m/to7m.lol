@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://to7m.lol/redirector.php?target=wikipedia-test-20240903231316&password=password123&created -->
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="generated-css/redirector.css">
+  <title>Redirector — Admin View for wikipedia-test-20240903231316</title>
+</head>
+
+<body>
+  <header>
+    <h1>Redirector</h1>
+    <span role="doc-subtitle">Admin View for wikipedia-test-20240903231316</span>
+    <p id="tmp-msg">Created successfully</p>  </header>
+  <main>
+    <form id="edit-redirector-form" style="display: grid;">
+      Target name:
+      wikipedia-test-20240903231316
+      <label for="new-url">Target URL:</label>
+      <input type="url" id="new-url" name="new-url" value="https://en.wikipedia.org/" required="">
+
+      <label for="new-password">UNENCRYPTED PLAINTEXT password:</label>
+      <input type="text" id="new-password" name="new-password" value="password123" maxlength="100" required="">
+
+      <button type="button" id="save">Save</button>
+      <button type="button" id="delete">Delete wikipedia-test-20240903231316 redirector completely</button>
+    </form>
+    <section id="result"></section>
+    <ul>
+      <li>
+        Example redirect link:
+        <a href="https://to7m.lol/redirector.php?target=wikipedia-test-20240903231316&amp;origin=_EXAMPLE-ORIGIN-NAME">https://to7m.lol/redirector.php?target=wikipedia-test-20240903231316&amp;origin=_EXAMPLE-ORIGIN-NAME</a>      </li>
+      <li>
+        Admin view:
+        <a href="https://to7m.lol/redirector.php?target=wikipedia-test-20240903231316&amp;password=password123">https://to7m.lol/redirector.php?target=wikipedia-test-20240903231316&amp;password=password123</a>      </li>
+    </ul>
+    <table>
+      <tbody><tr>
+        <th>Origin name</th>
+        <th>Unique IP address click count</th>
+      </tr>
+          </tbody></table>
+    <table>
+      <tbody><tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>IP address</th>
+        <th>Origin name</th>
+      </tr>
+          </tbody></table>
+  </main>
+
+  <script>
+    const tmpMsg = document.getElementById("tmp-msg");
+    const form = document.getElementById("edit-redirector-form");
+    const newUrl = document.getElementById("new-url");
+    const newPassword = document.getElementById("new-password");
+    const save = document.getElementById("save");
+    const deleteButton = document.getElementById("delete");
+    const result = document.getElementById("result");
+
+
+    function sendForm(formData, intendedAction) {
+        if (tmpMsg !== null) { tmpMsg.innerHTML = ""; }
+        result.innerHTML = "";
+
+        fetch("redirector.php", {method: "POST", body: formData})
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else if (!response.ok) {
+                response.text()
+                .then(responseText => {
+                    const responseJson = JSON.parse(responseText);
+                    result.innerHTML = `Redirector not ${intendedAction}: ${responseJson.error}`;
+                });
+            }
+        })
+        .catch(error => {
+            result.innerHTML = `Redirector not ${intendedAction}: ${error}`;
+        });
+    }
+
+
+    save.addEventListener("click", () => {
+        const formData = new FormData();
+        formData.append("action", "edit");
+        formData.append("target", "wikipedia-test-20240903231316");
+        formData.append("new-url", newUrl.value);
+        formData.append("old-password", "password123");
+        formData.append("new-password", newPassword.value);
+
+        sendForm(formData, "saved");
+    })
+
+
+    deleteButton.addEventListener("click", () => {
+        const formData = new FormData();
+        formData.append("action", "delete");
+        formData.append("target", "wikipedia-test-20240903231316");
+        formData.append("password", "password123");
+
+        sendForm(formData, "deleted");
+    })
+
+
+    form.style.display = "grid";
+  </script>
+
+
+
+</body></html>

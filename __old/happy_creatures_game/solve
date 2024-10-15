@@ -1,0 +1,35 @@
+000
+000
+000
+
+000
+100
+000
+
+100                             000                     000
+u00                             r10                     d00
+000                             000                     100
+
+r10                             010     000     000     000
+u00                             ru0     rr1     rd0     d00
+000                             000     000     010     r10
+
+rr1             rd0             1l0 0r1 001 000 000 000 000             000
+u00             u10             ru0 ru0 rru rrd rd0 rd0 d10             d00
+000             000             000 000 000 001 1l0 0r1 ru0             rr1
+
+rrd             rd0     rd0         0rd 01l 000     000 010     000     000
+u01             ur1     ud0         ru1 rru rrd     rd1 du0     dr1     d01
+000             000     010         000 000 01l     0ru ru0     ru0     rru
+
+rrd     rrd     rd1 rd0 rd0 rd0     0rd 1ll 000     001 1l0 0r1 001 000 001     000
+u1l     u0d     uru urd ud0 ud0     rud rru rrd     rdu du0 du0 dru drd d0u     d1l
+000     001     000 001 1l0 0r1     001 000 1ll     0ru ru0 ru0 ru0 ru1 rru     rru
+
+rrd     rrd         rd0     rd0     0rd             01l     0rd 01l     01l     010
+udl     u0d         urd     ud1     rud             rdu     du1 dru     d0u     dul
+010     01l         01l     0ru     01l             0ru     ru0 ru0     rru     rru
+
+rrd rrd rrd rrd     rd0     rd1     0rd             1ll     0rd 1ll     1ll 0dl 1l0 0r1
+udl udl u1d u0d     urd     udu     rud             rdu     dud dru     d0u d1u dul dul
+1l0 0r1 0ul 1ll     1ll     0ru     1ll             0ru     ru1 ru0     rru rru rru rru
