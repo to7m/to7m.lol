@@ -201,12 +201,13 @@ class Node:
                 child.perform_copy()
 
     def _copy_file(self):
+        if self.dst_path.path.name == "manifest.json":
+            print(self.src_path.path, self.dst_path.path, self.mode, self.mode.overwrite, self.src_path.exists())
+
         if self.dst_path.exists():
             if self.mode.overwrite:
                 self.dst_path.delete()
                 self.src_path.copy_file_to(self.dst_path)
-            else:
-                print(self.src_path.path, self.dst_path.path)
         else:
             if self.mode.add:
                 self.src_path.copy_file_to(self.dst_path)
