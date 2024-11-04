@@ -47,6 +47,9 @@ class OwcPath:
         for child in self.path.iterdir():
             yield cls(child)
 
+    def mkdir(self):
+        self.path.mkdir()
+
 
 class Mode:
     def __init__(self, *, add, delete, overwrite):
