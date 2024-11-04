@@ -16,6 +16,7 @@ class OwcPath:
         shutil.copy(self.path, dst_path)
 
     def delete(self):
+        print(self.path); raise
         if self.is_dir():
             for child in self.iterdir():
                 child.delete()
