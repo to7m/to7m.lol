@@ -129,6 +129,8 @@ class Mode:
 
 class Node:
     def __init__(self, src_path, dst_path, *, mode):
+        if isinstance(src_path, str):
+            raise Exception
         self.src_path = src_path
         self.dst_path = dst_path
         self.mode = mode
