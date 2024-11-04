@@ -56,6 +56,17 @@ class Mode:
         self.add, self.delete, self.overwrite = add, delete, overwrite
         self.children_mode = self
 
+    def __str__(self):
+        component_str = [
+            "NEVER", "OVERWRITE_ONLY", "DELETE_ONLY", "DELETE_OR_OVERWRITE",
+            "ADD_ONLY", "ADD_OR_OVERWRITE", "ADD_OR_DELETE", "ALWAYS"
+        ][(self.add << 2) + (self.delete << 1) + self.overwrite]
+
+        if self.children_mode is self:
+            return component_str
+        else:
+            return f"{component_str}_THEN_{self.children_mode}"
+
     @classmethod
     def _from_component_str(cls, component_str, *, default_mode):
         match component_str:
@@ -199,6 +210,8 @@ class Node:
                 self.src_path.copy_file_to(self.dst_path)
 
     def perform_copy(self):
+        print(self.src_path.path, self.dst_path.path, self.mode)
+
         if self.src_path.is_dir():
             self._copy_dir()
         else:
