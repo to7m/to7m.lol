@@ -25,7 +25,13 @@ class OwcPath:
             self.path.unlink()
 
     def exists(self):
-        return self.path.exists()
+        if self.path.exists():
+            return True
+        else:
+            for child in self.path.parent.iterdir():
+                print(child, child.exists())
+
+            return False
 
     @classmethod
     def from_obj(cls, obj):
@@ -201,9 +207,6 @@ class Node:
                 child.perform_copy()
 
     def _copy_file(self):
-        if self.dst_path.path.name == "manifest.json":
-            print(self.src_path.path, self.dst_path.path, self.mode, self.mode.overwrite, self.src_path.exists(), self.dst_path.exists())
-
         if self.dst_path.exists():
             if self.mode.overwrite:
                 self.dst_path.delete()
