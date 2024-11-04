@@ -122,7 +122,7 @@ class Mode:
             mode = cls.from_mode_str(mode_str, default_mode=default_mode)
         else:
             mode = default_mode.copy()
-            dst_filename = filename
+            dst_filename = src_filename
 
         return mode, dst_filename
 
