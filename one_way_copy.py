@@ -13,7 +13,7 @@ class OwcPath:
         return cls(self.path / filename)
 
     def copy_file_to(self, dst_path):
-        shutil.copy(self.path, dst_path)
+        shutil.copy(self.path, dst_path.path)
 
     def delete(self):
         if self.is_dir():
