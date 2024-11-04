@@ -159,14 +159,14 @@ class Node:
                 return True
             else:
                 if self.mode.overwrite:
-                    dst_path.delete()
-                    dst_path.mkdir()
+                    self.dst_path.delete()
+                    self.dst_path.mkdir()
                     return True
                 else:
                     return False
         else:
             if self.mode.add:
-                dst_path.mkdir()
+                self.dst_path.mkdir()
                 return True
             else:
                 return False
