@@ -205,13 +205,13 @@ class Node:
             if self.mode.overwrite:
                 self.dst_path.delete()
                 self.src_path.copy_file_to(self.dst_path)
+            else:
+                print(self.src_path.path, self.dst_path.path)
         else:
             if self.mode.add:
                 self.src_path.copy_file_to(self.dst_path)
 
     def perform_copy(self):
-        print(self.src_path.path, self.dst_path.path, self.mode)
-
         if self.src_path.is_dir():
             self._copy_dir()
         else:
