@@ -28,8 +28,8 @@ class OwcPath:
         if self.path.exists():
             return True
         else:
-            for child in self.path.parent.iterdir():
-                print(child, child.exists())
+            for sibling in self.path.parent.iterdir():
+                print(self.path, sibling, sibling.exists())
 
             return False
 
