@@ -129,8 +129,6 @@ class Mode:
 
 class Node:
     def __init__(self, src_path, dst_path, *, mode):
-        if isinstance(src_path, str):
-            raise Exception
         self.src_path = src_path
         self.dst_path = dst_path
         self.mode = mode
@@ -193,7 +191,7 @@ class Node:
                 self.src_path.copy_file_to(self.dst_path)
 
     def perform_copy(self):
-        if src_path.is_dir():
+        if self.src_path.is_dir():
             self._copy_dir()
         else:
             self._copy_file()
