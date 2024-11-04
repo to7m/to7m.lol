@@ -8,7 +8,9 @@ class OwcPath:
         self.name = path.name
 
     def __truediv__(self, filename):
-        return self.path / filename
+        cls = type(self)
+
+        return cls(self.path / filename)
 
     def copy_file_to(self, dst_path):
         shutil.copy(self.path, dst_path)
@@ -40,7 +42,10 @@ class OwcPath:
         return self.path.is_dir()
 
     def iterdir(self):
-        return self.path.iterdir()
+        cls = type(self)
+
+        for child in self.path.iterdir():
+            yield cls(child)
 
 
 class Mode:
