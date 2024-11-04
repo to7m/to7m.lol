@@ -202,7 +202,7 @@ class Node:
 
     def _copy_file(self):
         if self.dst_path.path.name == "manifest.json":
-            print(self.src_path.path, self.dst_path.path, self.mode, self.mode.overwrite, self.src_path.exists())
+            print(self.src_path.path, self.dst_path.path, self.mode, self.mode.overwrite, self.src_path.exists(), self.dst_path.exists())
 
         if self.dst_path.exists():
             if self.mode.overwrite:
