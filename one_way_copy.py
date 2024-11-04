@@ -217,5 +217,5 @@ def one_way_copy(src_path, dst_path, *, mode):
 import sys
 
 
-_, src_path, dst_path = sys.argv
-one_way_copy(src_path, dst_path, mode="ALWAYS")
+_, src_path, dst_path, mode = sys.argv
+one_way_copy(src_path, dst_path, mode=mode)
