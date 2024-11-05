@@ -34,5 +34,15 @@ def copy_and_fill_in_template(src, dst):
             dst.write_text(new_text)
 
 
+def process_scss():
+    subprocess.run([
+        "sass",
+        "--load-path=src/scss",
+        "--style=compressed",
+        "src/scss:dist/public_html/generated-css"
+    ])
+
+
 remove_old_dist_dir()
 copy_and_fill_in_template(SERVER_TEMPLATE_DIR, DIST_DIR)
+process_scss()
