@@ -2,59 +2,11 @@ from pathlib import Path
 import shutil
 
 
-class OwcPath:
-    def __init__(self, path):
-        self.path = path
-        self.name = path.name
-
-    def __truediv__(self, filename):
-        cls = type(self)
-
-        return cls(self.path / filename)
-
-    def copy_file_to(self, dst_path):
-        shutil.copy(self.path, dst_path.path)
-
-    def delete(self):
-        if self.is_dir():
-            for child in self.iterdir():
-                child.delete()
-
-            self.path.rmdir()
-        else:
-            self.path.unlink()
-
-    def exists(self):
-        if self.path.exists():
-            return True
-        else:
-            for sibling in self.path.parent.iterdir():
-                print(self.path, sibling, sibling.exists())
-
-            return False
-
-    @classmethod
-    def from_obj(cls, obj):
-        if type(obj) is str:
-            return cls.from_str(obj)
-        else:
-            raise TypeError(f"cannot make OwcPath from {type(obj)} instance")
-
-    @classmethod
-    def from_str(cls, s):
-        return cls(Path(s))
-
-    def is_dir(self):
-        return self.path.is_dir()
-
-    def iterdir(self):
-        cls = type(self)
-
-        for child in self.path.iterdir():
-            yield cls(child)
-
-    def mkdir(self):
-        self.path.mkdir()
+def delete_path(path):
+    if path.is_dir():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
 
 
 class Mode:
@@ -179,7 +131,7 @@ class Node:
                 return True
             else:
                 if self.mode.overwrite:
-                    self.dst_path.delete()
+                    delete_path(self.dst_path)
                     self.dst_path.mkdir()
                     return True
                 else:
@@ -196,7 +148,7 @@ class Node:
 
         for child_dst_path in self.dst_path.iterdir():
             if child_dst_path not in expected_child_dst_paths:
-                child_dst_path.delete()
+                delete_path(child_dst_path)
 
     def _copy_dir(self):
         if self._try_ensure_dst_dir():
@@ -209,11 +161,11 @@ class Node:
     def _copy_file(self):
         if self.dst_path.exists():
             if self.mode.overwrite:
-                self.dst_path.delete()
-                self.src_path.copy_file_to(self.dst_path)
+                delete_path(self.dst_path)
+                shutil.copy(self.src_path, self.dst_path)
         else:
             if self.mode.add:
-                self.src_path.copy_file_to(self.dst_path)
+                shutil.copy(self.src_path, self.dst_path)
 
     def perform_copy(self):
         if self.src_path.is_dir():
@@ -223,8 +175,8 @@ class Node:
 
 
 def one_way_copy(src_path, dst_path, *, mode):
-    src_path = OwcPath.from_obj(src_path)
-    dst_path = OwcPath.from_obj(dst_path)
+    src_path = Path(src_path)
+    dst_path = Path(dst_path)
     mode = Mode.from_obj(mode)
 
     main_node = Node(src_path, dst_path, mode=mode)
