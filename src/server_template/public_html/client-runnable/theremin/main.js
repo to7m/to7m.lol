@@ -2,7 +2,7 @@ const canvas = document.getElementsByTagName("canvas")[0];
 
 let activated = false;
 let audioContext;
-let freqParam, ampParam;
+let xProportionParam, yProportionParam;
 let running = false;
 let clicked = false;
 
@@ -24,30 +24,28 @@ async function activate() {
     const workletNode = new AudioWorkletNode(audioContext, "processor");
     workletNode.connect(audioContext.destination);
 
-    freqParam = workletNode.parameters.get("freq");
-    ampParam = workletNode.parameters.get("amp");
+    xProportionParam = workletNode.parameters.get("xProportion");
+    yProportionParam = workletNode.parameters.get("yProportion");
     running = true;
 
     for (let i = 0; i < 10; i++) {
-        console.log(`freqParam: ${freqParam}, ampParam: ${ampParam}`);
+        console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
         await sleep(1);
     }
 }
 
 
 function handleOffsetX(offsetX) {
-    const x = offsetX / (canvas.scrollWidth - 1);
-    const freq = 220.0 * 4.0 ** x;
-    console.log(`freqParam: ${freqParam}, ampParam: ${ampParam}`);
-    freqParam.setValueAtTime(freq, audioContext.currentTime);
+    const xProportion = offsetX / (canvas.scrollWidth - 1);
+    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
+    xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
 }
 
 
 function handleOffsetY(offsetY) {
-    const y = offsetY / (canvas.scrollHeight - 1);
-    const amp = 100 * 0.01 ** y;
-    console.log(`freqParam: ${freqParam}, ampParam: ${ampParam}`);
-    ampParam.setValueAtTime(amp, audioContext.currentTime);
+    const yProportion = offsetY / (canvas.scrollHeight - 1);
+    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
+    yProportionParam.setValueAtTime(yProportion, audioContext.currentTime);
 }
 
 
@@ -75,8 +73,8 @@ canvas.addEventListener("click", async (event) => {
 
 canvas.addEventListener("mouseup", async () => {
     clicked = false;
-    console.log(`freqParam: ${freqParam}, ampParam: ${ampParam}`);
-    ampParam.setValueAtTime(0.0, audioContext.currentTime);
+    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
+    yProportionParam.setValueAtTime(-2.0, audioContext.currentTime);
 
     console.log("unclick");
 })

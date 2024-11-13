@@ -141,8 +141,8 @@ class Processor extends AudioWorkletProcessor {
             },
             {
                 name: "yProportion",
-                defaultValue: 0.0,
-                minValue: 0.0,
+                defaultValue: -2.0,
+                minValue: -2.0,
                 maxValue: 1.0,
                 automationRate: "k-rate"
             }
