@@ -228,8 +228,8 @@ class Processor extends AudioWorkletProcessor {
 
     process(_inputList, outputList, parameters) {
         this.getReciprocalWeightings(this.bufferA);
-        this.getUnamplifiedWave(parameters.xProportion[0], reciprocalWeightings, this.bufferB);
-        this.getAmps(parameters.yProportion[0], reciprocalWeightings, this.bufferC);
+        this.getUnamplifiedWave(parameters.xProportion[0], this.bufferA, this.bufferB);
+        this.getAmps(parameters.yProportion[0], this.bufferA, this.bufferC);
 
         const firstOutput = outputList[0];
         const firstChannel = firstOutput[0];
