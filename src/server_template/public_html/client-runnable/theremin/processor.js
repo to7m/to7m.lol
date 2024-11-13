@@ -141,9 +141,9 @@ class Processor extends AudioWorkletProcessor {
             },
             {
                 name: "yProportion",
-                defaultValue: -2.0,
-                minValue: -2.0,
-                maxValue: 1.0,
+                defaultValue: 3.0,
+                minValue: 0.0,
+                maxValue: 3.0,
                 automationRate: "k-rate"
             }
         ];
@@ -212,7 +212,7 @@ class Processor extends AudioWorkletProcessor {
     }
 
     getAmps(yProportion, reciprocalWeightings, outBuffer) {
-        const biels = yProportion * RANGE_BIELS + LOW_BIELS;
+        const biels = (1 - yProportion) * RANGE_BIELS + LOW_BIELS;
         this.bielsMovingSum.process(biels, outBuffer);
         this.multiply(outBuffer, reciprocalWeightings, outBuffer);
         this.bielsToAmps(outBuffer);
