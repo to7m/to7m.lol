@@ -190,7 +190,7 @@ class Processor extends AudioWorkletProcessor {
     }
 
     getReciprocalWeightings(outBuffer) {
-        this.weightingMovingSum.process(newVal=1.0, outBuffer=outBuffer);
+        this.weightingMovingSum.process(newVal, outBuffer);
 
         for (let i = 0; i < BLOCK_SIZE; i++) {
             outBuffer[i] = 1.0 / outBuffer[i];
@@ -205,16 +205,16 @@ class Processor extends AudioWorkletProcessor {
 
     getUnamplifiedWave(xProportion, reciprocalWeightings, outBuffer) {
         const hertocts = xProportion * RANGE_HERTOCTS + LOW_HERTOCTS;
-        this.hertoctsMovingSum.process(newVal=hertocts, outBuffer=outBuffer);
-        this.multiply(outBuffer, reciprocalWeightings, outBuffer=outBuffer);
+        this.hertoctsMovingSum.process(hertocts, outBuffer);
+        this.multiply(outBuffer, reciprocalWeightings, outBuffer);
         this.hertoctsToPhases(outBuffer);
         this.phasesToSquare(outBuffer);
     }
 
     getAmps(yProportion, reciprocalWeightings, outBuffer) {
         const biels = yProportion * RANGE_BIELS + LOW_BIELS;
-        this.bielsMovingSum.process(newVal=biels, outBuffer=outBuffer);
-        this.multiply(outBuffer, reciprocalWeightings, outBuffer=outBuffer);
+        this.bielsMovingSum.process(biels, outBuffer);
+        this.multiply(outBuffer, reciprocalWeightings, outBuffer);
         this.bielsToAmps(outBuffer);
     }
 
@@ -228,18 +228,14 @@ class Processor extends AudioWorkletProcessor {
 
     process(_inputList, outputList, parameters) {
         this.getReciprocalWeightings(this.bufferA);
-        this.getUnamplifiedWave(
-            parameters.xProportion[0], reciprocalWeightings, outBuffer=this.bufferB
-        );
-        this.getAmps(
-            parameters.yProportion[0], reciprocalWeightings, outBuffer=this.bufferC
-        );
+        this.getUnamplifiedWave(parameters.xProportion[0], reciprocalWeightings, this.bufferB);
+        this.getAmps(parameters.yProportion[0], reciprocalWeightings, this.bufferC);
 
         const firstOutput = outputList[0];
         const firstChannel = firstOutput[0];
         const otherChannels = firstOutput.slice(1);
 
-        this.multiply(this.bufferB, this.bufferC, outBuffer=firstChannel);
+        this.multiply(this.bufferB, this.bufferC, firstChannel);
         this.fillOtherChannels(firstChannel, otherChannels);
 
         return true;
