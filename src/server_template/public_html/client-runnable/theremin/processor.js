@@ -190,7 +190,7 @@ class Processor extends AudioWorkletProcessor {
     }
 
     getReciprocalWeightings(outBuffer) {
-        this.weightingMovingSum.process(newVal, outBuffer);
+        this.weightingMovingSum.process(1.0, outBuffer);
 
         for (let i = 0; i < BLOCK_SIZE; i++) {
             outBuffer[i] = 1.0 / outBuffer[i];
