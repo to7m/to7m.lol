@@ -34,6 +34,11 @@ const CUMSUM_SIZE = LONG_CUMSUM_LEN + 1;
 
 
 if (FULL_BLOCKS < 1) {
+    console.log(NONZERO_WINDOW_SAMPLES);
+    console.log(STRAY_SAMPLES);
+    console.log(NONZERO_WINDOW_SAMPLES - STRAY_SAMPLES);
+    console.log((NONZERO_WINDOW_SAMPLES - STRAY_SAMPLES) / BLOCK_SIZE);
+    console.log(Math.round((NONZERO_WINDOW_SAMPLES - STRAY_SAMPLES) / BLOCK_SIZE));
     throw new Error("WINDOW_DURATION_S too low")
 }
 
