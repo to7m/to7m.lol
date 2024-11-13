@@ -30,21 +30,19 @@ async function activate() {
 
     for (let i = 0; i < 10; i++) {
         console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
-        await sleep(1);
+        await sleep(0.001);
     }
 }
 
 
 function handleOffsetX(offsetX) {
     const xProportion = offsetX / (canvas.scrollWidth - 1);
-    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
     xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
 }
 
 
 function handleOffsetY(offsetY) {
     const yProportion = offsetY / (canvas.scrollHeight - 1);
-    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
     yProportionParam.setValueAtTime(yProportion, audioContext.currentTime);
 }
 
@@ -73,7 +71,6 @@ canvas.addEventListener("click", async (event) => {
 
 canvas.addEventListener("mouseup", async () => {
     clicked = false;
-    console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
     yProportionParam.setValueAtTime(-2.0, audioContext.currentTime);
 
     console.log("unclick");
