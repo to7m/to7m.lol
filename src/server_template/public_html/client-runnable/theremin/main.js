@@ -24,13 +24,9 @@ async function activate() {
     const workletNode = new AudioWorkletNode(audioContext, "processor");
     workletNode.connect(audioContext.destination);
 
-    console.log(1);
     freqParam = workletNode.parameters.get("freq");
-    console.log(2);
     ampParam = workletNode.parameters.get("amp");
-    console.log(3);
     running = true;
-    console.log(4);
 
     for (let i = 0; i < 10; i++) {
         console.log(`freqParam: ${freqParam}, ampParam: ${ampParam}`);
