@@ -17,7 +17,9 @@ async function activate() {
     audioContext = new AudioContext();
 
     await audioContext.resume();
-    await audioContext.audioWorklet.addModule("client-runnable/theremin/processor.js");
+    await audioContext.audioWorklet.addModule(
+        "client-runnable/theremin/processor.js?v=!VERSION_STRING"
+    );
 
     const workletNode = new AudioWorkletNode(audioContext, "processor");
     workletNode.connect(audioContext.destination);
