@@ -113,6 +113,8 @@ class DoubleHannWindowedMovingSum {
             negativeHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
             outBuffer[i] = sum + negativeHannSum;
         }
+
+        console.log(newVal, sum, negativeHannSum);
     }
 }
 
