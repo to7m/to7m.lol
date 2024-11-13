@@ -16,13 +16,18 @@ async function activate() {
     activated = true;
     audioContext = new AudioContext();
 
+    console.log(1);
     await audioContext.resume();
+    console.log(2);
     await audioContext.audioWorklet.addModule(
         "client-runnable/theremin/processor.js?v=!VERSION_STRING"
     );
+    console.log(3);
 
     const workletNode = new AudioWorkletNode(audioContext, "processor");
+    console.log(4);
     workletNode.connect(audioContext.destination);
+    console.log(5);
 
     freqParam = workletNode.parameters.get("freq");
     ampParam = workletNode.parameters.get("amp");
