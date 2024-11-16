@@ -85,36 +85,26 @@ class DoubleHannWindowedMovingSum {
         }
     }
 
+    fillBuffer(startI, stopI, cumsumLen, outBuffer) {
+        const startPhase = this.phase + SAMPLE_PHASE_FOR_WINDOW;
+
+        const sum = this.getSum(this.cumsum, cumsumLen);
+        const cosSum = this.getSum(this.cosCumsum, cumsumLen);
+        const sinSum = this.getSum(this.sinCumsum, cumsumLen);
+
+        let phase, negativeHannSum;
+        for (let i = startI; i < stopI; i++) {
+            phase = startPhase + i * SAMPLE_PHASE_FOR_WINDOW;
+            negativeHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
+            outBuffer[i] = sum + negativeHannSum;
+        }
+    }
+
     process(newVal, outBuffer) {
         this.update(newVal);
 
-        const startPhase = this.phase + SAMPLE_PHASE_FOR_WINDOW;
-
-        let i = 0;
-        let sum, cosSum, sinSum;
-        let phase, negativeHannSum;
-
-        sum = this.getSum(this.cumsum, LONG_CUMSUM_LEN);
-        cosSum = this.getSum(this.cosCumsum, LONG_CUMSUM_LEN);
-        sinSum = this.getSum(this.sinCumsum, LONG_CUMSUM_LEN);
-
-        for (; i < BREAK_I; i++) {
-            phase = startPhase + i * SAMPLE_PHASE_FOR_WINDOW;
-            negativeHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
-            outBuffer[i] = sum + negativeHannSum;
-        }
-
-        sum = this.getSum(this.cumsum, SHORT_CUMSUM_LEN);
-        cosSum = this.getSum(this.cosCumsum, SHORT_CUMSUM_LEN);
-        sinSum = this.getSum(this.sinCumsum, SHORT_CUMSUM_LEN);
-
-        for (; i < BLOCK_SIZE; i++) {
-            phase = startPhase + i * SAMPLE_PHASE_FOR_WINDOW;
-            negativeHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
-            outBuffer[i] = sum + negativeHannSum;
-        }
-
-        console.log(newVal, sum, negativeHannSum);
+        this.fillBuffer(0, BREAK_I, LONG_CUMSUM_LEN, outBuffer);
+        this.fillBuffer(BREAK_I, BLOCK_SIZE, SHORT_CUMSUM_LEN, outBuffer);
     }
 }
 
