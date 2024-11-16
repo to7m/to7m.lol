@@ -4,7 +4,7 @@ const START_FREQ = 440.0;
 const LOW_AMP = 0.01;
 const HIGH_AMP = 1.0;
 const START_AMP = 0.000001;
-const WINDOW_DURATION_S = 0.01;
+const WINDOW_DURATION_S = 0.02;
 
 const LOW_HERTOCTS = Math.log2(LOW_FREQ);
 const RANGE_HERTOCTS = Math.log2(HIGH_FREQ) - LOW_HERTOCTS;
