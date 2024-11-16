@@ -39,7 +39,7 @@ function handleOffsets(offsets) {
         const xProportion = offsets.offsetX / (canvas.scrollWidth - 1);
         const yProportion = offsets.offsetY / (canvas.scrollHeight - 1);
         xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
-        yProportionParam.setValueAtTime(clicked ? yProportion : -2.0, audioContext.currentTime);
+        yProportionParam.setValueAtTime(clicked ? yProportion : 3.0, audioContext.currentTime);
     }
 }
 
