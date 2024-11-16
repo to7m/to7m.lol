@@ -34,59 +34,40 @@ async function activate() {
     }
 }
 
-
-function handleOffsetX(offsetX) {
-    const xProportion = offsetX / (canvas.scrollWidth - 1);
-    xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
-}
-
-
-function handleOffsetY(offsetY) {
-    const yProportion = offsetY / (canvas.scrollHeight - 1);
-    yProportionParam.setValueAtTime(yProportion, audioContext.currentTime);
-}
-
-
 function handleOffsets(offsets) {
-    if (running && clicked) {
-        handleOffsetX(offsets.offsetX);
-        handleOffsetY(offsets.offsetY);
+    if (running) {
+        const xProportion = offsets.offsetX / (canvas.scrollWidth - 1);
+        const yProportion = offsets.offsetY / (canvas.scrollHeight - 1);
+        xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
+        yProportionParam.setValueAtTime(clicked ? yProportion : -2.0, audioContext.currentTime);
     }
 }
 
 
-canvas.addEventListener("click", async (event) => {
+canvas.addEventListener("pointerdown", async (event) => {
     if (!activated) {
         activate();
 
-        console.log("activate");
+        console.log("activated");
     }
 
     clicked = true;
     handleOffsets(event);
 
-    console.log("click");
+    console.log("pointerdown");
 })
 
 
-canvas.addEventListener("mouseup", async () => {
+canvas.addEventListener("pointerup", (event) => {
     clicked = false;
-    yProportionParam.setValueAtTime(-2.0, audioContext.currentTime);
-
-    console.log("unclick");
-})
-
-
-canvas.addEventListener("mousemove", (event) => {
     handleOffsets(event);
 
-    console.log("mousemove");
+    console.log("pointerup");
 })
 
 
-canvas.addEventListener("touchmove", (event) => {
-    const lastTouch = event.touches[event.touches.length - 1];
-    handleOffsets(lastTouch);
+canvas.addEventListener("pointermove", (event) => {
+    handleOffsets(event);
 
-    console.log("touchmove");
+    console.log("pointermove");
 })

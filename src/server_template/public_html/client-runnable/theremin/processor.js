@@ -157,7 +157,7 @@ class Processor extends AudioWorkletProcessor {
 
     phasesToSquare(buffer) {
         for (let i = 0; i < BLOCK_SIZE; i++) {
-            buffer[i] = buffer[i] < PI ? -1.0 : 1.0;
+            buffer[i] = buffer[i] < PI ? 1.0 : -1.0;
         }
     }
 
