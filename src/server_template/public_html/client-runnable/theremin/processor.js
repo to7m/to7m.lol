@@ -92,11 +92,11 @@ class DoubleHannWindowedMovingSum {
         const cosSum = this.getSum(this.cosCumsum, cumsumLen);
         const sinSum = this.getSum(this.sinCumsum, cumsumLen);
 
-        let phase, negativeHannSum;
+        let phase, rectangleMinusDoubleHannSum;
         for (let i = startI; i < stopI; i++) {
             phase = startPhase + i * SAMPLE_PHASE_FOR_WINDOW;
-            negativeHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
-            outBuffer[i] = sum + negativeHannSum;
+            rectangleMinusDoubleHannSum = cosSum * Math.cos(phase) + sinSum * Math.sin(phase);
+            outBuffer[i] = sum - rectangleMinusDoubleHannSum;
         }
     }
 
