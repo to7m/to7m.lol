@@ -60,7 +60,7 @@ canvas.addEventListener("pointerdown", async (event) => {
     if (!activated) {
 
         console.log(`C ${running}`);
-        activate();
+        await activate();
 
     console.log(`D ${running}`);
 
