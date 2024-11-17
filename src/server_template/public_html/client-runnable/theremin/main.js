@@ -49,6 +49,8 @@ canvas.addEventListener("pointerdown", async (event) => {
     clicked = true;
     handleOffsets(event);
 
+    event.preventDefault();
+
     console.log("exiting pointerdown");
 })
 
@@ -59,6 +61,8 @@ canvas.addEventListener("pointerup", (event) => {
     clicked = false;
     handleOffsets(event);
 
+    event.preventDefault();
+
     console.log("exiting pointerup");
 })
 
@@ -67,6 +71,9 @@ canvas.addEventListener("pointermove", (event) => {
     console.log("starting pointermove");
 
     handleOffsets(event);
+
+
+    event.preventDefault();
 
     console.log("exiting pointermove");
 })
