@@ -27,65 +27,46 @@ async function activate() {
     xProportionParam = workletNode.parameters.get("xProportion");
     yProportionParam = workletNode.parameters.get("yProportion");
     running = true;
-    console.log(`A ${running}`);
-
-    for (let i = 0; i < 10; i++) {
-        console.log(`x: ${xProportionParam}, y: ${yProportionParam}`);
-        await sleep(0.001);
-    }
-
-
-    console.log(`B ${running}`);
 }
 
 function handleOffsets(offsets) {
-
-    console.log(`F ${running}`);
     if (running) {
-
-    console.log(`G ${running}`);
         const xProportion = offsets.offsetX / (canvas.scrollWidth - 1);
         const yProportion = offsets.offsetY / (canvas.scrollHeight - 1);
         xProportionParam.setValueAtTime(xProportion, audioContext.currentTime);
         yProportionParam.setValueAtTime(clicked ? yProportion : 3.0, audioContext.currentTime);
-    } else {
-
-    console.log(`H ${running}`);
-        console.log("not running");
     }
 }
 
 
 canvas.addEventListener("pointerdown", async (event) => {
+    console.log("starting pointerdown");
+
     if (!activated) {
-
-        console.log(`C ${running}`);
         await activate();
-
-    console.log(`D ${running}`);
-
-        console.log("activated");
     }
 
     clicked = true;
-
-    console.log(`E ${running}`);
     handleOffsets(event);
 
-    console.log("pointerdown");
+    console.log("exiting pointerdown");
 })
 
 
 canvas.addEventListener("pointerup", (event) => {
+    console.log("starting pointerup");
+
     clicked = false;
     handleOffsets(event);
 
-    console.log("pointerup");
+    console.log("exiting pointerup");
 })
 
 
 canvas.addEventListener("pointermove", (event) => {
+    console.log("starting pointermove");
+
     handleOffsets(event);
 
-    console.log("pointermove");
+    console.log("exiting pointermove");
 })
