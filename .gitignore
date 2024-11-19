@@ -168,5 +168,6 @@ cython_debug/
 # My additions
 
 # Only relevant to my build process
+/g
 /ssh/
 /r
